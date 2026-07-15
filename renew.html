@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💎 Продлить подписку BananVPN</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">🍌</span>
+                <span class="brand-text">BananVPN</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="index.html#features">Возможности</a>
+                <a href="index.html#pricing">Тарифы</a>
+                <a href="mailto:banan.vpn@yandex.ru" class="btn btn-secondary">Поддержка</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="renew-hero">
+        <div class="container">
+            <h1>💎 Продление подписки</h1>
+            <p>Выберите тариф и оплатите — доступ откроется мгновенно</p>
+        </div>
+    </section>
+
+    <section class="renew-form-section">
+        <div class="container">
+            <div class="renew-card">
+                <div class="renew-card-icon">🍌</div>
+                <h2>Выберите тариф</h2>
+                
+                <form id="renewForm" onsubmit="return handleRenew(event)">
+                    <div class="form-group">
+                        <label for="email">📧 Ваш email</label>
+                        <input type="email" id="email" placeholder="example@mail.ru" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>💎 Тарифы</label>
+                        <div class="plan-selector">
+                            <label class="plan-option" data-plan="monthly">
+                                <input type="radio" name="plan" value="monthly">
+                                <div class="plan-content">
+                                    <span class="plan-name">📆 Месячный</span>
+                                    <span class="plan-price">199 ₽</span>
+                                    <span class="plan-period">на 1 месяц</span>
+                                </div>
+                            </label>
+                            
+                            <label class="plan-option popular" data-plan="annual">
+                                <input type="radio" name="plan" value="annual" checked>
+                                <div class="plan-content">
+                                    <span class="plan-badge">🔥 Экономия 600 ₽</span>
+                                    <span class="plan-name">📅 Годовой</span>
+                                    <span class="plan-price">149 ₽/мес</span>
+                                    <span class="plan-period">1 788 ₽ за 12 месяцев</span>
+                                </div>
+                            </label>
+                            
+                            <label class="plan-option premium" data-plan="lifetime">
+                                <input type="radio" name="plan" value="lifetime">
+                                <div class="plan-content">
+                                    <span class="plan-badge">👑 Лучшая цена</span>
+                                    <span class="plan-name">♾️ Пожизненная</span>
+                                    <span class="plan-price">2 999 ₽</span>
+                                    <span class="plan-period">один платёж — навсегда</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>💳 Способ оплаты</label>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card" checked>
+                                <span>💳 Карта</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="crypto">
+                                <span>🪙 Криптовалюта</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="qiwi">
+                                <span>📱 Qiwi</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="sbp">
+                                <span>🏦 СБП</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="total-price">
+                        <span>Итого к оплате:</span>
+                        <span class="total-amount" id="totalAmount">1 788 ₽</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large btn-block">
+                        🔒 Перейти к оплате
+                    </button>
+                </form>
+
+                <div class="renew-security">
+                    <span>🔒</span>
+                    <span>Все данные защищены. Оплата через защищённое соединение.</span>
+                </div>
+
+                <div class="renew-guarantee">
+                    <span>✅</span>
+                    <span>Гарантия возврата в течение 7 дней</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">🍌</span>
+                    <span class="brand-text">BananVPN</span>
+                    <p>Защищенный доступ в интернет</p>
+                </div>
+                <div class="footer-copyright">
+                    © 2024 BananVPN. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
