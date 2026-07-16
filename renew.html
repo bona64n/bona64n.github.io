@@ -4,15 +4,478 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💎 Продлить подписку BananVPN</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a14;
+            color: #cdd6f4;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .navbar {
+            padding: 16px 0;
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1a1a2e;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo {
+            font-size: 32px;
+        }
+
+        .brand-text {
+            background: linear-gradient(135deg, #ffd700, #ffb700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: #a6adc8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* ===== КНОПКИ ===== */
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700, #e6c200);
+            color: #0a0a14;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: #1a1a2e;
+            color: #cdd6f4;
+            border: 1px solid #2a2a3e;
+        }
+
+        .btn-secondary:hover {
+            background: #2a2a3e;
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 14px 32px;
+            font-size: 16px;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* ===== СТРАНИЦА ПРОДЛЕНИЯ ===== */
+        .renew-hero {
+            padding: 60px 0 30px;
+            text-align: center;
+            background: #0a0a14;
+        }
+
+        .renew-hero h1 {
+            font-size: 40px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #ffb700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .renew-hero p {
+            color: #6c7086;
+            font-size: 16px;
+        }
+
+        .renew-form-section {
+            padding: 30px 0 80px;
+            background: #0a0a14;
+            flex: 1;
+        }
+
+        .renew-card {
+            max-width: 540px;
+            margin: 0 auto;
+            background: #14141e;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #1a1a2e;
+            text-align: center;
+        }
+
+        .renew-card-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .renew-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #cdd6f4;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #a6adc8;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: #0a0a14;
+            border: 1px solid #1a1a2e;
+            color: #cdd6f4;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .form-group input::placeholder {
+            color: #6c7086;
+        }
+
+        /* ===== ПЛАН-СЕЛЕКТОР ===== */
+        .plan-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .plan-option {
+            display: block;
+            padding: 14px 18px;
+            border-radius: 12px;
+            background: #0a0a14;
+            border: 2px solid #1a1a2e;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .plan-option:hover {
+            border-color: #2a2a3e;
+        }
+
+        .plan-option:has(input:checked) {
+            border-color: #ffd700;
+            background: #1a1a2e;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+
+        .plan-option input[type="radio"] {
+            display: none;
+        }
+
+        .plan-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .plan-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 10px;
+            border-radius: 10px;
+            background: #ffd700;
+            color: #0a0a14;
+            letter-spacing: 0.5px;
+        }
+
+        .plan-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: #cdd6f4;
+            min-width: 100px;
+        }
+
+        .plan-price {
+            font-weight: 800;
+            font-size: 20px;
+            color: #ffd700;
+            margin-left: auto;
+        }
+
+        .plan-period {
+            font-size: 12px;
+            color: #6c7086;
+            width: 100%;
+        }
+
+        .plan-option:has(input:checked) .plan-period {
+            color: #a6adc8;
+        }
+
+        /* ===== ОПЛАТА ===== */
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #0a0a14;
+            border: 1px solid #1a1a2e;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+
+        .payment-option:hover {
+            border-color: #2a2a3e;
+        }
+
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+
+        .payment-option:has(input:checked) {
+            border-color: #ffd700;
+            background: #1a1a2e;
+        }
+
+        /* ===== ИТОГО ===== */
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: #1a1a2e;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 1px solid #2a2a3e;
+        }
+
+        .total-price span {
+            font-size: 16px;
+            font-weight: 600;
+            color: #a6adc8;
+        }
+
+        .total-amount {
+            font-size: 24px !important;
+            font-weight: 800 !important;
+            color: #ffd700 !important;
+        }
+
+        /* ===== БЕЗОПАСНОСТЬ ===== */
+        .renew-security {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #6c7086;
+        }
+
+        .renew-guarantee {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #a6e3a1;
+        }
+
+        .renew-guarantee span:first-child {
+            font-size: 18px;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            padding: 40px 0;
+            background: #0a0a14;
+            border-top: 1px solid #1a1a2e;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-brand {
+            text-align: center;
+        }
+
+        .footer-brand .brand-text {
+            font-size: 20px;
+        }
+
+        .footer-brand p {
+            color: #6c7086;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #6c7086;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+
+        .footer-copyright {
+            color: #3a3a4e;
+            font-size: 12px;
+        }
+
+        /* ===== АДАПТАЦИЯ ===== */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: #0a0a14;
+                padding: 20px;
+                border-bottom: 1px solid #1a1a2e;
+                gap: 16px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .renew-card {
+                padding: 24px;
+                margin: 0 10px;
+            }
+
+            .plan-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .plan-price {
+                margin-left: 0;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .renew-hero h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- ===== НАВИГАЦИЯ ===== -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
                 <span class="logo">🍌</span>
-                <span class="brand-text">BananVPN</span>
+                <span class="brand-text">Banan-VPN</span>
             </div>
             <div class="nav-links">
                 <a href="index.html">Главная</a>
@@ -23,25 +486,29 @@
         </div>
     </nav>
 
+    <!-- ===== ГЕРОЙ ===== -->
     <section class="renew-hero">
         <div class="container">
-            <h1>💎 Продление подписки</h1>
+            <h1>💎 Продление подписки Banan-VPN</h1>
             <p>Выберите тариф и оплатите — доступ откроется мгновенно</p>
         </div>
     </section>
 
+    <!-- ===== ФОРМА ===== -->
     <section class="renew-form-section">
         <div class="container">
             <div class="renew-card">
                 <div class="renew-card-icon">🍌</div>
                 <h2>Выберите тариф</h2>
-                
+
                 <form id="renewForm" onsubmit="return handleRenew(event)">
+                    <!-- ===== EMAIL ===== -->
                     <div class="form-group">
                         <label for="email">📧 Ваш email</label>
                         <input type="email" id="email" placeholder="example@mail.ru" required>
                     </div>
 
+                    <!-- ===== ТАРИФЫ ===== -->
                     <div class="form-group">
                         <label>💎 Тарифы</label>
                         <div class="plan-selector">
@@ -53,7 +520,7 @@
                                     <span class="plan-period">на 1 месяц</span>
                                 </div>
                             </label>
-                            
+
                             <label class="plan-option popular" data-plan="annual">
                                 <input type="radio" name="plan" value="annual" checked>
                                 <div class="plan-content">
@@ -63,7 +530,7 @@
                                     <span class="plan-period">1 788 ₽ за 12 месяцев</span>
                                 </div>
                             </label>
-                            
+
                             <label class="plan-option premium" data-plan="lifetime">
                                 <input type="radio" name="plan" value="lifetime">
                                 <div class="plan-content">
@@ -76,6 +543,7 @@
                         </div>
                     </div>
 
+                    <!-- ===== ОПЛАТА ===== -->
                     <div class="form-group">
                         <label>💳 Способ оплаты</label>
                         <div class="payment-options">
@@ -84,35 +552,37 @@
                                 <span>💳 Карта</span>
                             </label>
                             <label class="payment-option">
-                                <input type="radio" name="payment" value="crypto">
-                                <span>🪙 Криптовалюта</span>
+                                <input type="radio" name="payment" value="sbp">
+                                <span>🏦 СБП</span>
                             </label>
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="qiwi">
                                 <span>📱 Qiwi</span>
                             </label>
                             <label class="payment-option">
-                                <input type="radio" name="payment" value="sbp">
-                                <span>🏦 СБП</span>
+                                <input type="radio" name="payment" value="crypto">
+                                <span>🪙 Криптовалюта</span>
                             </label>
                         </div>
                     </div>
 
+                    <!-- ===== ИТОГО ===== -->
                     <div class="total-price">
                         <span>Итого к оплате:</span>
                         <span class="total-amount" id="totalAmount">1 788 ₽</span>
                     </div>
 
+                    <!-- ===== КНОПКА ОПЛАТЫ ЧЕРЕЗ ЮMONEY ===== -->
                     <button type="submit" class="btn btn-primary btn-large btn-block">
-                        🔒 Перейти к оплате
+                        💳 Оплатить через ЮMoney
                     </button>
                 </form>
 
+                <!-- ===== БЕЗОПАСНОСТЬ ===== -->
                 <div class="renew-security">
                     <span>🔒</span>
                     <span>Все данные защищены. Оплата через защищённое соединение.</span>
                 </div>
-
                 <div class="renew-guarantee">
                     <span>✅</span>
                     <span>Гарантия возврата в течение 7 дней</span>
@@ -121,21 +591,113 @@
         </div>
     </section>
 
+    <!-- ===== ФУТЕР ===== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <span class="logo">🍌</span>
-                    <span class="brand-text">BananVPN</span>
+                    <span class="brand-text">Banan-VPN</span>
                     <p>Защищенный доступ в интернет</p>
                 </div>
-                <div class="footer-copyright">
-                    © 2024 BananVPN. Все права защищены.
+                <div class="footer-links">
+                    <a href="renew.html">Продлить</a>
+                    <a href="index.html#features">Возможности</a>
+                    <a href="index.html#pricing">Тарифы</a>
+                    <a href="mailto:banan.vpn@yandex.ru">Поддержка</a>
                 </div>
+                <div class="footer-copyright">© 2024 Banan-VPN. Все права защищены.</div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // ===== МОБИЛЬНОЕ МЕНЮ =====
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) navLinks.classList.toggle('active');
+        }
+
+        // ===== ОБНОВЛЕНИЕ СУММЫ =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const planRadios = document.querySelectorAll('input[name="plan"]');
+            const totalElement = document.getElementById('totalAmount');
+
+            const prices = {
+                'monthly': '199 ₽',
+                'annual': '1 788 ₽',
+                'lifetime': '2 999 ₽'
+            };
+
+            planRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const plan = this.value;
+                    totalElement.textContent = prices[plan] || '0 ₽';
+                });
+            });
+        });
+
+        // ===== ОБРАБОТКА ФОРМЫ =====
+        function handleRenew(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const plan = document.querySelector('input[name="plan"]:checked');
+            const payment = document.querySelector('input[name="payment"]:checked');
+
+            if (!email || !plan || !payment) {
+                alert('⚠️ Пожалуйста, заполните все поля!');
+                return false;
+            }
+
+            const planNames = {
+                'monthly': '📆 Месячный (199 ₽)',
+                'annual': '📅 Годовой (1 788 ₽)',
+                'lifetime': '♾️ Пожизненный (2 999 ₽)'
+            };
+
+            const paymentNames = {
+                'card': '💳 Карта',
+                'sbp': '🏦 СБП',
+                'qiwi': '📱 Qiwi',
+                'crypto': '🪙 Криптовалюта'
+            };
+
+            // Перенаправляем на страницу оплаты ЮMoney
+            const prices = {
+                'monthly': 199,
+                'annual': 1788,
+                'lifetime': 2999
+            };
+
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://yoomoney.ru/quickpay/confirm.xml';
+
+            const fields = {
+                'receiver': '4100119575797853',
+                'formcomment': 'Оплата подписки BananVPN',
+                'short-dest': 'Подписка BananVPN',
+                'quickpay-form': 'donate',
+                'targets': 'Оплата подписки BananVPN: ' + email,
+                'currency': '643',
+                'sum': prices[plan.value],
+                'label': 'Email: ' + email
+            };
+
+            for (const [key, value] of Object.entries(fields)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+
+            return false;
+        }
+    </script>
 </body>
 </html>
