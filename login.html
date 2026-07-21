@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔑 Вход в BananVPN</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a14;
+            color: #cdd6f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #14141e;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #2a2a3e;
+            text-align: center;
+            max-width: 400px;
+        }
+        .logo { font-size: 64px; }
+        h1 { color: #ffd700; margin: 10px 0; }
+        p { color: #6c7086; margin: 10px 0; }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, #ffd700, #e6c200);
+            color: #0a0a14;
+            margin: 10px 0;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,215,0,0.3); }
+        .error { color: #f38ba8; margin: 10px 0; }
+        .success { color: #a6e3a1; margin: 10px 0; }
+        .email { color: #89b4fa; font-weight: bold; }
+        .token-box {
+            background: #0a0a14;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            word-break: break-all;
+            margin: 10px 0;
+            border: 1px solid #2a2a3e;
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🍌</div>
+        <h1>BananVPN</h1>
+        <p>Вход в аккаунт</p>
+        
+        <div id="status">
+            <p class="email" id="emailDisplay">Загрузка...</p>
+            <div class="token-box" id="tokenDisplay">Токен: загрузка...</div>
+            <button class="btn" id="copyBtn">📋 Скопировать токен</button>
+            <p id="message"></p>
+        </div>
+        
+        <p style="font-size: 12px; color: #3a3a4e; margin-top: 20px;">
+            ⏱ Токен действителен 5 минут<br>
+            Вставьте его в приложение BananVPN
+        </p>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        const email = params.get('email');
+        
+        const emailDisplay = document.getElementById('emailDisplay');
+        const tokenDisplay = document.getElementById('tokenDisplay');
+        const copyBtn = document.getElementById('copyBtn');
+        const message = document.getElementById('message');
+        
+        if (token && email) {
+            emailDisplay.textContent = `📧 ${email}`;
+            tokenDisplay.textContent = `🔑 Токен: ${token}`;
+            
+            copyBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(token).then(() => {
+                    message.className = 'success';
+                    message.textContent = '✅ Токен скопирован! Вставьте его в приложение.';
+                    copyBtn.textContent = '✅ Скопировано';
+                }).catch(() => {
+                    message.className = 'error';
+                    message.textContent = '❌ Не удалось скопировать. Скопируйте вручную:';
+                    // Показываем токен для ручного копирования
+                    const manualBox = document.createElement('div');
+                    manualBox.className = 'token-box';
+                    manualBox.textContent = token;
+                    document.getElementById('status').appendChild(manualBox);
+                });
+            });
+        } else {
+            emailDisplay.textContent = '❌ Неверная ссылка!';
+            copyBtn.style.display = 'none';
+            tokenDisplay.textContent = 'Ошибка: неверный токен';
+            message.className = 'error';
+            message.textContent = 'Пожалуйста, запросите новую ссылку в приложении.';
+        }
+    </script>
+</body>
+</html>
